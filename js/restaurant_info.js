@@ -22,7 +22,7 @@ initMap = () => {
         scrollWheelZoom: false
       });
       L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}', {
-        mapboxToken: '<your MAPBOX API KEY HERE>',
+        mapboxToken: 'pk.eyJ1IjoiZ3RtNzc3IiwiYSI6ImNqamdwZGp2bjEyNWozcHBhYWVqYmg2d3EifQ.aIg-oiwGhNoYMaN6pchTtw',
         maxZoom: 18,
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
           '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
@@ -82,6 +82,8 @@ fetchRestaurantFromURL = (callback) => {
 fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
   name.innerHTML = restaurant.name;
+  name.setAttribute('aria-label',restaurant.name);
+  name.setAttribute('tabIndex',0);
 
   const address = document.getElementById('restaurant-address');
   address.innerHTML = restaurant.address;
@@ -89,9 +91,12 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img'
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.setAttribute('alt',restaurant.name);
 
   const cuisine = document.getElementById('restaurant-cuisine');
-  cuisine.innerHTML = restaurant.cuisine_type;
+  cuisine.innerHTML = restaurant.cuisine_type;  
+  cuisine.setAttribute('aria-label',restaurant.cuisine_type);
+  cuisine.setAttribute('tabIndex',0);
 
   // fill operating hours
   if (restaurant.operating_hours) {
@@ -116,7 +121,7 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
     const time = document.createElement('td');
     time.innerHTML = operatingHours[key];
     row.appendChild(time);
-
+    row.setAttribute('tabIndex',0);
     hours.appendChild(row);
   }
 }
@@ -128,11 +133,15 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   const container = document.getElementById('reviews-container');
   const title = document.createElement('h2');
   title.innerHTML = 'Reviews';
+  title.setAttribute('aria-label',"Reviews");
+  title.setAttribute('tabIndex',0);
   container.appendChild(title);
 
   if (!reviews) {
     const noReviews = document.createElement('p');
     noReviews.innerHTML = 'No reviews yet!';
+    noReviews.setAttribute('aria-label',"No Reviews for this restaurant");
+    noReviews.setAttribute('tabIndex',0);
     container.appendChild(noReviews);
     return;
   }
@@ -150,18 +159,26 @@ createReviewHTML = (review) => {
   const li = document.createElement('li');
   const name = document.createElement('p');
   name.innerHTML = review.name;
+  name.setAttribute('aria-label',review.name +"'s review ");
+  name.setAttribute('tabIndex',0);
   li.appendChild(name);
 
   const date = document.createElement('p');
   date.innerHTML = review.date;
+  date.setAttribute('aria-label',"Date :"+review.date);
+  date.setAttribute('tabIndex',0);
   li.appendChild(date);
 
   const rating = document.createElement('p');
   rating.innerHTML = `Rating: ${review.rating}`;
+  rating.setAttribute('aria-label',`Rating: ${review.rating}`);
+  rating.setAttribute('tabIndex',0);
   li.appendChild(rating);
 
   const comments = document.createElement('p');
   comments.innerHTML = review.comments;
+  comments.setAttribute('aria-label',review.comments);
+  comments.setAttribute('tabIndex',0);
   li.appendChild(comments);
 
   return li;

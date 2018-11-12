@@ -3,6 +3,7 @@
 
 <head>
   <!-- Normalize.css for better cross-browser consistency -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
   <!-- Main CSS file -->
   <link rel="stylesheet" href="css/styles.css" type="text/css">
@@ -27,25 +28,27 @@
   <!-- End header -->
 
   <!-- Beginning main -->
-  <main id="maincontent">
+  <main class="cont" id="maincontent" role="main">
     <!-- Beginning map -->
-    <section id="map-container">
-      <div id="map"></div>
+    
+     <section  id="map-container">
+      <div id="map" aria-label="GoogleMaps locations of the restaurants"   aria-hidden="true" ></div>
     </section>
+     
     <!-- End map -->
     <!-- Beginning restaurant -->
-    <section id="restaurant-container">
+     <section  id="restaurant-container">
       <h1 id="restaurant-name"></h1>
       <img id="restaurant-img">
       <p id="restaurant-cuisine"></p>
       <p id="restaurant-address"></p>
       <table id="restaurant-hours"></table>
-    </section>
+    </section> 
     <!-- end restaurant -->
     <!-- Beginning reviews -->
-    <section id="reviews-container">
-      <ul id="reviews-list"></ul>
-    </section>
+     <section  id="reviews-container" >
+      <ul id="reviews-list" class="gd-container"></ul>
+    </section> 
     <!-- End reviews -->
   </main>
   <!-- End main -->
@@ -64,7 +67,6 @@
   <!-- Google Maps -->
  <!--  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_tKbW6A5pQ-eupxI56myUnHLqYCzOjKo&libraries=places&callback=initMap"></script> -->
   <!-- End scripts -->
-
 </body>
 
 </html>
